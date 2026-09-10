@@ -16,13 +16,18 @@ avviksklasser og en obligatorisk håndbevegelse spesifisert til ±13° ved 2 Hz.
 | §3 | Feltmålinger — ytringsfrekvens etter klassetrinn |
 | §4 | Utførelsesprotokoll — håndbevegelsen som teknisk tegning |
 | §5 | Avviksklasser A–D |
-| §6 | Konklusjon |
+| §6 | Litteratur — oppdiktet, henvist til som [n] i teksten |
+| §7 | Konklusjon |
 
 Tallene i Fig. 2 er merket som illustrasjonsdata. Alt i Tabell 1 er
 verifiserbart: 67 er det 19. primtallet, danner et *sexy primtallspar* med 61,
 er atomnummeret til holmium — grunnstoffet med det høyeste magnetiske momentet
 av alle naturlig forekommende — og 67° N er første hele breddegrad nord for
 polarsirkelen.
+
+Dokumentet holder to atskilte henvisningssystemer: hevet tall peker til
+**Kildegrunnlag** i kolofonen, som er verifiserbart, mens `[n]` peker til
+**§6 Litteratur**, som i sin helhet er oppdiktet og merket som det.
 
 Instituttet i dokumentet finnes ikke. Tallet gjør det.
 

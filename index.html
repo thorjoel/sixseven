@@ -253,6 +253,34 @@ ol.steps p em{color:var(--ink-3)}
   .swing-l,.swing-r{animation:none;transform:rotate(-13deg)}
 }
 
+/* ---------- litteratur ---------- */
+sup.lit{
+  font-family:"Spline Sans Mono",monospace;font-size:.58em;font-weight:500;
+  color:var(--accent);letter-spacing:0;
+}
+ol.biblio{list-style:none;counter-reset:b;margin:0;padding:0;
+  display:flex;flex-direction:column;gap:20px}
+ol.biblio li{counter-increment:b;display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px}
+ol.biblio li::before{
+  content:"[" counter(b) "]";
+  font-family:"Spline Sans Mono",monospace;font-size:11.5px;color:var(--accent);
+  font-variant-numeric:tabular-nums;padding-top:4px;
+}
+ol.biblio li > p{grid-column:2}
+.cite{margin:0;font-size:15.5px;line-height:1.5;max-width:64ch}
+.cite em{font-style:italic;color:var(--ink)}
+.struck{text-decoration:line-through;text-decoration-thickness:1px;color:var(--ink-3)}
+.annot{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--ink-3);max-width:60ch}
+.meta{margin:9px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.status{
+  font-family:"Spline Sans Mono",monospace;font-size:9.5px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.11em;
+  padding:3px 8px;border:1px solid var(--slate);color:var(--slate);
+}
+.status.pending{border-style:dashed;border-color:var(--ink-3);color:var(--ink-3)}
+.status.retracted{border-color:var(--accent);background:var(--accent);color:var(--paper)}
+.doi{font-family:"Spline Sans Mono",monospace;font-size:10.5px;color:var(--ink-3)}
+
 /* ---------- chart ---------- */
 .c-grid{stroke:var(--rule);stroke-width:1}
 .c-axis{stroke:var(--ink-2);stroke-width:1.3}
@@ -473,7 +501,8 @@ ol.refs li{margin-bottom:7px}
             <tr>
               <th scope="row">Sifferbrøk</th>
               <td class="val">6/7 = 0,<span class="rep">857142</span></td>
-              <td>Periodelengde 6, siffersum 27. Aldri avsluttet &#8212; jf. §5.</td>
+              <td>Periodelengde 6, siffersum 27.<sup class="lit">[5]</sup>
+              Aldri avsluttet &#8212; jf. §5.</td>
             </tr>
             <tr>
               <th scope="row">Atomnummer</th>
@@ -579,9 +608,11 @@ ol.refs li{margin-bottom:7px}
           kroppen. <em>Én hånd er ikke godkjent utførelse.</em></p></li>
           <li><p>Sett hendene i motfase om håndleddsaksen. Amplitude
           <span class="mono num">±13&#176;</span>, frekvens
-          <span class="mono num">1,8&#8211;2,2 Hz</span>. Bevegelsen skal virke
+          <span class="mono num">1,8&#8211;2,2 Hz</span>.<sup class="lit">[2]</sup>
+          Bevegelsen skal virke
           uanstrengt; den er det ikke.</p></li>
-          <li><p>Ytre <em>«six seven»</em> på fallende tonehøyde. Norsk form
+          <li><p>Ytre <em>«six seven»</em> på fallende tonehøyde.<sup class="lit">[1]</sup>
+          Norsk form
           <em>sekstisju</em> er språklig korrekt og protokollmessig avvist.</p></li>
           <li><p>Avslutt uten forklaring. Enhver begrunnelse gitt i etterkant
           annullerer utførelsen i sin helhet.</p></li>
@@ -667,6 +698,89 @@ ol.refs li{margin-bottom:7px}
   <section class="row">
     <div class="rail">
       <span class="clause">§6</span>
+      <h2>Litteratur</h2>
+      <p class="note">Henvist til som [n] i teksten. Samtlige oppføringer
+      er oppdiktet.</p>
+    </div>
+    <div class="body-col">
+      <div class="prose tight">
+        <p>Utvalget er ikke uttømmende. Feltet er ungt, og de fleste bidragene
+        er publisert etter at måleobjektet allerede hadde nådd metning.</p>
+      </div>
+      <ol class="biblio">
+        <li>
+          <p class="cite"><b>Bakkefall, T., &amp; Hvidsten, M.</b> (2025). Prosodisk
+          fall i sekstisju-ytringen: akustisk analyse av 340 klasseromsopptak.
+          <em>Nordisk tidsskrift for muntlig metrologi</em>, 12(6), 67&#8211;74.</p>
+          <p class="annot">Etablerer tonefallet som obligatorisk. Ytringer med
+          stigende intonasjon ble avvist som feil utførelse av samtlige
+          respondenter.</p>
+          <p class="meta"><span class="status">Fagfellevurdert</span>
+          <span class="doi">doi:10.6700/nmm.2025.67</span></p>
+        </li>
+        <li>
+          <p class="cite"><b>Sæterbakken, O., Ruud, A.-K., &amp; Lislevand, P.</b>
+          (2026). Bilateral håndoscillasjon ved 2 Hz: motfase som semiotisk
+          minstekrav. <em>Acta Kinesiologica Ludica</em>, 8(1), 13&#8211;29.</p>
+          <p class="annot">Kilden til amplitudekravet i §4. Enhåndsutførelse ble
+          ikke gjenkjent som gyldig av noen av de 212 informantene.</p>
+          <p class="meta"><span class="status">Fagfellevurdert</span>
+          <span class="doi">doi:10.6700/akl.2026.13</span></p>
+        </li>
+        <li>
+          <p class="cite"><b>Aasheim, K.</b> (2026). Ingen kontekst, ingen betydning,
+          ingen avslutning: 67 som rent fatisk språkhandling.
+          <em>Journal of Phatic Utterance</em>, 41(2), 200&#8211;207.</p>
+          <p class="annot">Argumenterer for at tallet ikke <em>betyr</em> noe, men
+          <em>gjør</em> noe. Instituttet har lagt denne posisjonen til grunn
+          for §1.</p>
+          <p class="meta"><span class="status">Fagfellevurdert</span>
+          <span class="doi">doi:10.6700/jpu.2026.200</span></p>
+        </li>
+        <li>
+          <p class="cite"><b>Døhlen, R.</b> (2026). Mislykket replikasjon av
+          Bakkefall &amp; Hvidsten (2025) i voksen populasjon.
+          <em>Nordisk tidsskrift for muntlig metrologi</em>, 13(1), 4&#8211;9.</p>
+          <p class="annot">Ingen målbar effekt. Forfatteren konkluderer at
+          instrumentet er aldersavhengig, ikke defekt. Jf. avviksklasse C.</p>
+          <p class="meta"><span class="status">Fagfellevurdert</span>
+          <span class="doi">doi:10.6700/nmm.2026.04</span></p>
+        </li>
+        <li>
+          <p class="cite"><b>Lunde, H.</b> (2026). Periodelengde 6 og siffersum 27:
+          om hvorfor 6/7 aldri avsluttes.
+          <em>Skandinavisk arkiv for anvendt tallteori</em>, 54, 611&#8211;628.</p>
+          <p class="annot">Rent matematisk arbeid, uten referanse til ytringen. Tas
+          likevel inn, fordi konklusjonen er den samme.</p>
+          <p class="meta"><span class="status">Fagfellevurdert</span>
+          <span class="doi">doi:10.6700/saat.2026.611</span></p>
+        </li>
+        <li>
+          <p class="cite"><b>Myrvang, S.</b> (2026). Sekstisju som identitetsmarkør
+          i norsk ungdomsskole: en etnografisk studie. Innsendt til
+          <em>Nordisk tidsskrift for muntlig metrologi</em>.</p>
+          <p class="annot">Feltarbeidet ble avbrutt etter elleve dager, da forskeren
+          ble gjenkjent som voksen.</p>
+          <p class="meta"><span class="status pending">Under vurdering</span>
+          <span class="doi">preprint, ikke paginert</span></p>
+        </li>
+        <li>
+          <p class="cite"><b>[Navn tilbakeholdt]</b> (2026).
+          <span class="struck">Utbedring av avvik i klasse D: et selvforsøk.</span>
+          <em>Nordisk tidsskrift for muntlig metrologi</em>.</p>
+          <p class="annot">Trukket tilbake på forfatterens forespørsel. Se §5.
+          Rapporten er unntatt offentlighet, og forfatteren er nå selv
+          klassifisert.</p>
+          <p class="meta"><span class="status retracted">Trukket tilbake</span>
+          <span class="doi">doi:10.6700/nmm.2026.67 &#8212; inaktiv</span></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail">
+      <span class="clause">§7</span>
       <h2>Konklusjon</h2>
       <p class="note">Godkjent av kalibreringsutvalget</p>
     </div>
@@ -688,7 +802,7 @@ ol.refs li{margin-bottom:7px}
 
   <footer class="colophon">
     <div>
-      <span class="label">Kildegrunnlag</span>
+      <span class="label">Kildegrunnlag &#183; verifiserbart</span>
       <ol class="refs">
         <li>Dictionary.com kåret «67» til Word of the Year 2025.</li>
         <li>Skrilla, «Doot Doot (6 7)», 2024. Tallparets primærkilde.</li>
