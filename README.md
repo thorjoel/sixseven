@@ -42,7 +42,10 @@ output directory er repo-rota.
 - Fullt lys/mørkt tema via `prefers-color-scheme` og `data-theme`.
 - Håndbevegelsen i Fig. 3 respekterer `prefers-reduced-motion` og fryses da
   i motsatt utslag, slik at stillbildet fortsatt viser gesten.
-- Typografi: Bricolage Grotesque, Petrona og Spline Sans Mono via Google Fonts.
+- Typografi: Bricolage Grotesque, Petrona og Spline Sans Mono, inlinet som
+  base64 woff2 direkte i fila. Ingen eksterne kall — sida er selvstendig.
+  Fire variabel-faces over latin-subsettet, deklarert over sine reelle
+  wght-akser (200-800, 100-900, 300-700).
 
 ## Måleusikkerhet
 
