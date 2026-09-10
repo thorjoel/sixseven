@@ -569,3 +569,10 @@ ol.toc .s{
   .table-wrap{overflow:visible}
   table{min-width:0}
 }
+
+/* seglet er en lenke til forsiden */
+a.crest{
+  text-decoration:none;color:var(--ink);
+  transition:border-color .15s ease,color .15s ease;
+}
+a.crest:hover{border-color:var(--accent);color:var(--accent)}
