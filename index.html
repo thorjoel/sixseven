@@ -1,0 +1,693 @@
+<title>Sekstisju-protokollen</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Petrona:ital,wght@0,400;0,500;0,600;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#E9EBE4;
+  --panel:#DFE2D9;
+  --raised:#F3F4EF;
+  --ink:#14181A;
+  --ink-2:#3E464A;
+  --ink-3:#717A7C;
+  --rule:#C3C8BC;
+  --rule-hard:#9BA398;
+  --accent:#CF4520;
+  --accent-soft:#F4DCD3;
+  --slate:#24393F;
+  --tape:#B9992B;
+  --shadow:rgba(20,24,26,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101618;
+    --panel:#171F22;
+    --raised:#1B2427;
+    --ink:#E7EBE4;
+    --ink-2:#AAB4B0;
+    --ink-3:#7C8783;
+    --rule:#2B3538;
+    --rule-hard:#414D50;
+    --accent:#F2653A;
+    --accent-soft:#38201A;
+    --slate:#9CC0C6;
+    --tape:#D9C24A;
+    --shadow:rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101618;
+  --panel:#171F22;
+  --raised:#1B2427;
+  --ink:#E7EBE4;
+  --ink-2:#AAB4B0;
+  --ink-3:#7C8783;
+  --rule:#2B3538;
+  --rule-hard:#414D50;
+  --accent:#F2653A;
+  --accent-soft:#38201A;
+  --slate:#9CC0C6;
+  --tape:#D9C24A;
+  --shadow:rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Petrona",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--paper)}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.doc{max-width:1120px;margin:0 auto;padding:0 26px 72px}
+
+/* ---------- shared type roles ---------- */
+.mono{font-family:"Spline Sans Mono",ui-monospace,"SFMono-Regular",Consolas,monospace}
+.label{
+  font-family:"Spline Sans Mono",ui-monospace,Consolas,monospace;
+  font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.13em;
+  color:var(--ink-3);
+}
+.display{
+  font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  font-weight:800;letter-spacing:-.025em;line-height:1;text-wrap:balance;
+}
+.num{font-variant-numeric:tabular-nums}
+.prose{max-width:63ch}
+.prose p{margin:0 0 .85em}
+.prose p:last-child{margin-bottom:0}
+.lead{font-size:20px;line-height:1.5;color:var(--ink-2)}
+.tight{font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- masthead ---------- */
+.masthead{
+  display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 40px;
+  padding:30px 0 14px;
+}
+.crest{
+  width:52px;height:52px;flex:none;
+  border:1.5px solid var(--ink);border-radius:50%;
+  display:grid;place-items:center;
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;font-size:19px;
+  letter-spacing:-.03em;
+}
+.org{flex:1 1 260px}
+.org b{
+  display:block;
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:600;
+  font-size:15px;letter-spacing:.02em;text-transform:uppercase;
+}
+.org span{display:block;font-size:13px;color:var(--ink-3);font-style:italic}
+.stamped{display:flex;gap:26px;flex-wrap:wrap}
+.stamped div{display:flex;flex-direction:column;gap:3px}
+.stamped strong{font-family:"Spline Sans Mono",monospace;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.tape-strip{
+  height:13px;
+  background:repeating-linear-gradient(90deg,var(--rule-hard) 0 1px,transparent 1px 8px);
+  border-top:1.5px solid var(--ink);
+  border-bottom:1px solid var(--rule);
+}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,.85fr);gap:44px;padding:40px 0 46px}
+.bignum{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;
+  font-size:clamp(96px,17.5vw,204px);line-height:.8;letter-spacing:-.05em;
+  display:flex;gap:.06em;margin:0 0 6px;
+}
+.bignum i{font-style:normal}
+.bignum .seven{
+  color:var(--accent-soft);
+  -webkit-text-stroke:3.5px var(--accent);
+}
+.title-under{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin-bottom:22px}
+.title-under h1{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:600;
+  font-size:23px;letter-spacing:.01em;margin:0;text-transform:uppercase;
+}
+.pron{font-size:15px;color:var(--ink-3);font-style:italic}
+.abstract{border-left:2px solid var(--accent);padding-left:18px}
+.abstract .label{color:var(--accent);margin-bottom:7px;display:block}
+
+/* ---------- figures ---------- */
+figure{margin:0}
+figcaption{
+  font-family:"Spline Sans Mono",monospace;font-size:11.5px;line-height:1.5;
+  color:var(--ink-3);margin-top:10px;
+}
+figcaption b{color:var(--ink-2);font-weight:600}
+.fig-frame{
+  background:var(--raised);
+  border:1px solid var(--rule);
+  padding:14px;
+}
+.fig-frame svg{display:block;width:100%;height:auto}
+
+/* ruler colors */
+.r-axis{stroke:var(--ink);stroke-width:1.4}
+.r-tick{stroke:var(--rule-hard);stroke-width:1}
+.r-tick-major{stroke:var(--ink-2);stroke-width:1.3}
+.r-txt{font-family:"Spline Sans Mono",monospace;font-size:10px;fill:var(--ink-3)}
+.r-mark{stroke:var(--accent);stroke-width:1.6;stroke-dasharray:5 3}
+.r-mark-txt{font-family:"Spline Sans Mono",monospace;font-size:11.5px;font-weight:600;fill:var(--accent)}
+.r-ref{stroke:var(--slate);stroke-width:1;stroke-dasharray:2 3}
+.r-ref-txt{font-family:"Spline Sans Mono",monospace;font-size:10px;fill:var(--slate)}
+.r-body{fill:var(--panel);stroke:var(--rule-hard);stroke-width:1}
+
+/* ---------- section grid ---------- */
+.row{
+  display:grid;grid-template-columns:172px minmax(0,1fr);gap:34px;
+  padding:32px 0;border-top:1px solid var(--rule);
+}
+.rail{display:flex;flex-direction:column;gap:6px}
+.rail .clause{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;
+  font-size:15px;color:var(--accent);letter-spacing:.02em;
+}
+.rail h2{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:600;
+  font-size:17px;line-height:1.2;margin:0;letter-spacing:.01em;
+}
+.rail .note{font-family:"Spline Sans Mono",monospace;font-size:10.5px;color:var(--ink-3);line-height:1.5}
+.body-col{display:flex;flex-direction:column;gap:22px;min-width:0}
+
+/* ---------- tables ---------- */
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px}
+caption{text-align:left;padding-bottom:8px}
+th,td{
+  text-align:left;padding:9px 14px 9px 0;
+  border-bottom:1px solid var(--rule);vertical-align:baseline;
+}
+thead th{
+  font-family:"Spline Sans Mono",monospace;font-size:10.5px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.11em;color:var(--ink-3);
+  border-bottom:1.4px solid var(--ink-2);padding-bottom:7px;
+}
+tbody th{
+  font-family:"Spline Sans Mono",monospace;font-size:13px;font-weight:500;
+  color:var(--ink);white-space:nowrap;
+}
+td{font-size:15.5px;color:var(--ink-2)}
+td.val{
+  font-family:"Spline Sans Mono",monospace;font-size:14px;color:var(--ink);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+.rep{border-top:1.2px solid currentColor;padding-top:1px}
+.klass{
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;font-size:15px;
+  width:1.9em;height:1.9em;display:inline-grid;place-items:center;
+  border:1.4px solid var(--ink-2);color:var(--ink);
+}
+.klass.k-a{border-color:var(--slate);color:var(--slate)}
+.klass.k-d{border-color:var(--accent);background:var(--accent);color:var(--paper)}
+
+/* ---------- procedure ---------- */
+.proc{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,270px);gap:30px;align-items:start}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px}
+ol.steps li::before{
+  content:counter(s,decimal-leading-zero);
+  font-family:"Spline Sans Mono",monospace;font-size:12px;font-weight:600;
+  color:var(--accent);padding-top:3px;font-variant-numeric:tabular-nums;
+}
+ol.steps p{margin:0;font-size:15.5px;line-height:1.5}
+ol.steps p em{color:var(--ink-3)}
+
+.hand{fill:var(--panel);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
+.h-pivot{fill:var(--accent)}
+.h-arc{fill:none;stroke:var(--accent);stroke-width:1.2}
+.h-txt{font-family:"Spline Sans Mono",monospace;font-size:10px;fill:var(--ink-3)}
+.h-axis{stroke:var(--rule-hard);stroke-width:1;stroke-dasharray:3 3}
+.swing-l,.swing-r{transform-box:view-box;animation:swing .52s ease-in-out infinite alternate}
+.swing-l{transform-origin:66px 128px}
+/* Speilvendte pivoter: samme rotasjonsfortegn gir motsatt utslag ved fingertuppene. */
+.swing-r{transform-origin:174px 128px}
+@keyframes swing{from{transform:rotate(-13deg)}to{transform:rotate(13deg)}}
+@media (prefers-reduced-motion:reduce){
+  .swing-l,.swing-r{animation:none;transform:rotate(-13deg)}
+}
+
+/* ---------- chart ---------- */
+.c-grid{stroke:var(--rule);stroke-width:1}
+.c-axis{stroke:var(--ink-2);stroke-width:1.3}
+.c-bar{fill:var(--slate)}
+.c-bar-hi{fill:var(--accent)}
+.c-txt{font-family:"Spline Sans Mono",monospace;font-size:10.5px;fill:var(--ink-3)}
+.c-val{font-family:"Spline Sans Mono",monospace;font-size:10.5px;font-weight:600;fill:var(--ink-2)}
+.c-val-hi{fill:var(--accent)}
+.c-thresh{stroke:var(--accent);stroke-width:1.2;stroke-dasharray:6 4}
+
+/* ---------- key–value strip ---------- */
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1px solid var(--rule)}
+.kv div{padding:14px 16px 14px 0;border-bottom:1px solid var(--rule)}
+.kv dt{margin:0 0 5px}
+.kv dd{
+  margin:0;font-family:"Spline Sans Mono",monospace;font-size:15px;font-weight:500;
+  font-variant-numeric:tabular-nums;color:var(--ink);
+}
+
+/* ---------- conclusion + seal ---------- */
+.verdict{
+  background:var(--slate);color:var(--paper);
+  padding:34px 34px 30px;position:relative;overflow:hidden;
+}
+.verdict .label{color:rgba(233,235,228,.62)}
+.verdict q{
+  display:block;quotes:none;
+  font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;
+  font-size:clamp(28px,4.6vw,46px);line-height:1.02;letter-spacing:-.03em;
+  margin:12px 0 16px;max-width:19ch;color:#F3F4EF;
+}
+.verdict q b{color:var(--tape);font-weight:800}
+.verdict p{margin:0;max-width:46ch;color:rgba(243,244,239,.78);font-size:16px}
+.seal{
+  position:absolute;right:26px;bottom:22px;
+  transform:rotate(-8deg);
+  border:2px solid var(--tape);
+  padding:9px 14px;text-align:center;color:var(--tape);
+  font-family:"Spline Sans Mono",monospace;
+}
+.seal .s1{font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.seal .s2{font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;font-size:27px;line-height:1.05;letter-spacing:.01em}
+.seal .s3{font-size:9.5px;letter-spacing:.1em}
+@media (max-width:620px){.seal{position:static;display:inline-block;margin-top:22px;transform:rotate(-3deg)}}
+
+/* ---------- footer ---------- */
+.colophon{border-top:1.5px solid var(--ink);margin-top:34px;padding-top:20px;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:34px}
+ol.refs{margin:0;padding-left:1.4em;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
+ol.refs li{margin-bottom:7px}
+.sig{display:flex;flex-direction:column;gap:8px}
+.sigline{border-bottom:1px solid var(--ink-2);height:34px}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:30px}
+  .proc{grid-template-columns:1fr}
+  .colophon{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .row{grid-template-columns:1fr;gap:14px}
+  .rail{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+}
+</style>
+
+<div class="doc">
+
+  <header class="masthead">
+    <div class="crest">67</div>
+    <div class="org">
+      <b>Norsk institutt for sekstisju-kalibrering</b>
+      <span>Seksjon for muntlig metrologi · Bodø</span>
+    </div>
+    <div class="stamped">
+      <div><span class="label">Dokument</span><strong>NISK-67/2026</strong></div>
+      <div><span class="label">Revisjon</span><strong>6.7</strong></div>
+      <div><span class="label">Status</span><strong>Gjeldende</strong></div>
+      <div><span class="label">Måleusikkerhet</span><strong>±0</strong></div>
+    </div>
+  </header>
+  <div class="tape-strip"></div>
+
+  <section class="hero">
+    <div>
+      <p class="bignum"><i>6</i><i class="seven">7</i></p>
+      <div class="title-under">
+        <h1>Sekstisju-protokollen</h1>
+        <span class="pron mono">sekstisju &#183; eldre form: syv og seksti</span>
+      </div>
+      <div class="abstract prose">
+        <span class="label">Sammendrag</span>
+        <p>Denne protokollen fastsetter normativ bruk av tallet <b>67</b> som muntlig
+        respons i norsk dagligtale. Grunnenheten er avledet av lengdemålet
+        6′7″ &#8212; seks fot og sju tommer &#8212; som ved eksakt omregning gir
+        <span class="mono num">2006,6&nbsp;mm</span>.</p>
+        <p>Tallet krever ingen kontekst, bærer intet semantisk innhold og lar seg
+        ikke oversettes. Instituttet har derfor gått bort fra å definere det, og
+        beskriver det i stedet slik man beskriver et referansemål: ved sine
+        toleranser.</p>
+      </div>
+    </div>
+
+    <figure>
+      <div class="fig-frame">
+        <svg viewBox="0 0 230 420" role="img" aria-label="Vertikal målestav fra 0 til 210 centimeter med markering ved 200,66 centimeter.">
+          <rect x="0" y="0" width="230" height="420" fill="none"></rect>
+
+          <!-- reference silhouette block -->
+          <rect class="r-body" x="150" y="81.9" width="26" height="308.1"></rect>
+
+          <!-- axis -->
+          <line class="r-axis" x1="44" y1="390" x2="44" y2="24"></line>
+
+          <!-- minor ticks every 10 cm -->
+          <line class="r-tick" x1="44" y1="372.9" x2="55" y2="372.9"></line>
+          <line class="r-tick" x1="44" y1="355.7" x2="55" y2="355.7"></line>
+          <line class="r-tick" x1="44" y1="338.6" x2="55" y2="338.6"></line>
+          <line class="r-tick" x1="44" y1="321.4" x2="55" y2="321.4"></line>
+          <line class="r-tick" x1="44" y1="287.1" x2="55" y2="287.1"></line>
+          <line class="r-tick" x1="44" y1="269.9" x2="55" y2="269.9"></line>
+          <line class="r-tick" x1="44" y1="252.7" x2="55" y2="252.7"></line>
+          <line class="r-tick" x1="44" y1="235.6" x2="55" y2="235.6"></line>
+          <line class="r-tick" x1="44" y1="201.3" x2="55" y2="201.3"></line>
+          <line class="r-tick" x1="44" y1="184.1" x2="55" y2="184.1"></line>
+          <line class="r-tick" x1="44" y1="166.9" x2="55" y2="166.9"></line>
+          <line class="r-tick" x1="44" y1="149.7" x2="55" y2="149.7"></line>
+          <line class="r-tick" x1="44" y1="115.4" x2="55" y2="115.4"></line>
+          <line class="r-tick" x1="44" y1="98.3" x2="55" y2="98.3"></line>
+          <line class="r-tick" x1="44" y1="63.9" x2="55" y2="63.9"></line>
+          <line class="r-tick" x1="44" y1="46.7" x2="55" y2="46.7"></line>
+
+          <!-- major ticks every 50 cm -->
+          <line class="r-tick-major" x1="44" y1="390" x2="66" y2="390"></line>
+          <text class="r-txt" x="73" y="393.5">0</text>
+          <line class="r-tick-major" x1="44" y1="304.3" x2="66" y2="304.3"></line>
+          <text class="r-txt" x="73" y="307.8">50</text>
+          <line class="r-tick-major" x1="44" y1="218.6" x2="66" y2="218.6"></line>
+          <text class="r-txt" x="73" y="222.1">100</text>
+          <line class="r-tick-major" x1="44" y1="132.9" x2="66" y2="132.9"></line>
+          <text class="r-txt" x="73" y="136.4">150</text>
+          <line class="r-tick-major" x1="44" y1="30" x2="66" y2="30"></line>
+          <text class="r-txt" x="73" y="33.5">210 cm</text>
+
+          <!-- national reference height -->
+          <line class="r-ref" x1="36" y1="81.9" x2="196" y2="81.9"></line>
+          <text class="r-ref-txt" x="36" y="76">179,7 &#8212; gj.snitt, menn</text>
+
+          <!-- the measurement -->
+          <line class="r-mark" x1="30" y1="46" x2="212" y2="46"></line>
+          <circle cx="44" cy="46" r="3.6" fill="var(--accent)"></circle>
+          <text class="r-mark-txt" x="212" y="40" text-anchor="end">6&#8242;7&#8243; = 200,66 cm</text>
+        </svg>
+      </div>
+      <figcaption><b>Fig. 1</b> &#8212; Referansemålet plassert på nasjonal
+      lengdeskala. Differansen til gjennomsnittshøyden er 20,96 cm, tilnærmet
+      1/10 av grunnmålet.</figcaption>
+    </figure>
+  </section>
+
+  <section class="row">
+    <div class="rail">
+      <span class="clause">§1</span>
+      <h2>Opphav og omløp</h2>
+      <p class="note">Kildekritisk gjennomgang</p>
+    </div>
+    <div class="body-col">
+      <div class="prose">
+        <p class="lead">Tallet trer inn i språket via to uavhengige kanaler, og
+        det er sammenfallet &#8212; ikke kanalene &#8212; som gir det bæreevne.</p>
+        <p>Den ene er musikalsk: refrenget i Skrillas «Doot Doot (6 7)» fra 2024,
+        der tallparet gjentas uten forklaring.<sup>2</sup> Den andre er idrettslig:
+        6&#8242;7&#8243; er en registrert kroppshøyde i profesjonell basketball,
+        blant annet for LaMelo Ball.<sup>3</sup> Ingen av kanalene tilfører
+        betydning. Begge tilfører frekvens.</p>
+        <p>Instituttet registrerte de første feltobservasjonene i norske klasserom
+        høsten 2025. I desember samme år kåret Dictionary.com «67» til årets
+        ord.<sup>1</sup> Vi anser saken som avgjort, men ikke som forstått.</p>
+      </div>
+      <dl class="kv">
+        <div><dt class="label">Primærkilde</dt><dd>2024</dd></div>
+        <div><dt class="label">Norsk feltdebut</dt><dd>Q3 2025</dd></div>
+        <div><dt class="label">Årets ord</dt><dd>2025</dd></div>
+        <div><dt class="label">Kjernedemografi</dt><dd>9&#8211;14 år</dd></div>
+        <div><dt class="label">Halveringstid</dt><dd>ukjent</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail">
+      <span class="clause">§2</span>
+      <h2>Nummerisk revisjon</h2>
+      <p class="note">Egenskaper ved tallet, uavhengig av bruk</p>
+    </div>
+    <div class="body-col">
+      <div class="table-wrap">
+        <table>
+          <caption class="label">Tabell 1 &#8212; Verifiserte egenskaper ved 67</caption>
+          <thead>
+            <tr><th scope="col">Egenskap</th><th scope="col">Verdi</th><th scope="col">Merknad</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Primtall</th>
+              <td class="val">19. i rekken</td>
+              <td>Udelelig. Dette er ikke en metafor, men det fungerer som en.</td>
+            </tr>
+            <tr>
+              <th scope="row">Primtallspar</th>
+              <td class="val">(61, 67)</td>
+              <td>Differanse 6. Klassifiseres i tallteorien som et <em>sexy primtallspar</em>.
+              Betegnelsen er etablert og ikke vår.</td>
+            </tr>
+            <tr>
+              <th scope="row">Sifferprodukt</th>
+              <td class="val">6 &#215; 7 = 42</td>
+              <td>Instituttet kommenterer ikke dette videre.</td>
+            </tr>
+            <tr>
+              <th scope="row">Sifferbrøk</th>
+              <td class="val">6/7 = 0,<span class="rep">857142</span></td>
+              <td>Periodelengde 6, siffersum 27. Aldri avsluttet &#8212; jf. §5.</td>
+            </tr>
+            <tr>
+              <th scope="row">Atomnummer</th>
+              <td class="val">Ho &#8212; holmium</td>
+              <td>Har det høyeste magnetiske momentet av alle naturlig
+              forekommende elementer. Vi ber leseren vurdere sammenfallet selv.</td>
+            </tr>
+            <tr>
+              <th scope="row">Breddegrad</th>
+              <td class="val">67&#176; N</td>
+              <td>Første hele breddegrad nord for polarsirkelen (66&#176;33&#8242;).
+              Krysser landet like sør for instituttets adresse.</td>
+            </tr>
+            <tr>
+              <th scope="row">Uttale</th>
+              <td class="val">sekstisju</td>
+              <td>Etter nytellingsmåten, innført 1951 av hensyn til telefonnettet.<sup>4</sup>
+              Formen <em>syv og seksti</em> er fortsatt gyldig, men lyder ikke.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail">
+      <span class="clause">§3</span>
+      <h2>Feltmålinger</h2>
+      <p class="note">Fig. 2 · illustrasjonsdata</p>
+    </div>
+    <div class="body-col">
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 660 300" role="img" aria-label="Stolpediagram over ytringer per skoletime etter klassetrinn, med toppunkt 67 på sjuende trinn.">
+            <!-- gridlines -->
+            <line class="c-grid" x1="60" y1="250" x2="640" y2="250"></line>
+            <line class="c-grid" x1="60" y1="187.1" x2="640" y2="187.1"></line>
+            <line class="c-grid" x1="60" y1="124.3" x2="640" y2="124.3"></line>
+            <line class="c-grid" x1="60" y1="61.4" x2="640" y2="61.4"></line>
+            <text class="c-txt" x="52" y="253.5" text-anchor="end">0</text>
+            <text class="c-txt" x="52" y="190.6" text-anchor="end">20</text>
+            <text class="c-txt" x="52" y="127.8" text-anchor="end">40</text>
+            <text class="c-txt" x="52" y="64.9" text-anchor="end">60</text>
+            <text class="c-txt" x="14" y="150" text-anchor="middle" transform="rotate(-90 14 150)">ytringer / skoletime</text>
+
+            <!-- bars -->
+            <rect class="c-bar" x="81" y="152.6" width="52" height="97.4"></rect>
+            <text class="c-val" x="107" y="146" text-anchor="middle">31</text>
+            <rect class="c-bar" x="174" y="80.3" width="52" height="169.7"></rect>
+            <text class="c-val" x="200" y="73.7" text-anchor="middle">54</text>
+            <rect class="c-bar-hi" x="267" y="39.4" width="52" height="210.6"></rect>
+            <text class="c-val c-val-hi" x="293" y="32.8" text-anchor="middle">67</text>
+            <rect class="c-bar" x="361" y="67.7" width="52" height="182.3"></rect>
+            <text class="c-val" x="387" y="61.1" text-anchor="middle">58</text>
+            <rect class="c-bar" x="454" y="180.9" width="52" height="69.1"></rect>
+            <text class="c-val" x="480" y="174.3" text-anchor="middle">22</text>
+            <rect class="c-bar" x="547" y="231.1" width="52" height="18.9"></rect>
+            <text class="c-val" x="573" y="224.5" text-anchor="middle">6</text>
+
+            <!-- threshold at 67 -->
+            <line class="c-thresh" x1="60" y1="39.4" x2="640" y2="39.4"></line>
+            <text class="c-val c-val-hi" x="640" y="33" text-anchor="end">metningspunkt 67</text>
+
+            <!-- axis + categories -->
+            <line class="c-axis" x1="60" y1="250" x2="640" y2="250"></line>
+            <text class="c-txt" x="107" y="268" text-anchor="middle">5. trinn</text>
+            <text class="c-txt" x="200" y="268" text-anchor="middle">6. trinn</text>
+            <text class="c-txt" x="293" y="268" text-anchor="middle">7. trinn</text>
+            <text class="c-txt" x="387" y="268" text-anchor="middle">8. trinn</text>
+            <text class="c-txt" x="480" y="268" text-anchor="middle">9. trinn</text>
+            <text class="c-txt" x="573" y="268" text-anchor="middle">10. trinn</text>
+            <text class="c-txt" x="350" y="290" text-anchor="middle">klassetrinn</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 2</b> &#8212; Ytringsfrekvens etter klassetrinn.
+        Kurven topper seg på 7. trinn med 67 ytringer per skoletime, hvilket
+        instituttet har valgt å behandle som et sammentreff.
+        <b>Illustrasjonsdata</b> &#8212; tallene er eksempelverdier laget for denne
+        figuren, ikke innsamlede målinger.</figcaption>
+      </figure>
+      <div class="prose tight">
+        <p>Fallet fra 8. til 10. trinn er den eneste observasjonen med
+        prognoseverdi: bruken opphører ikke fordi tallet mister kraft, men fordi
+        brukeren blir gammel nok til å høre seg selv si det.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail">
+      <span class="clause">§4</span>
+      <h2>Utførelses&shy;protokoll</h2>
+      <p class="note">Obligatorisk håndbevegelse · Fig. 3</p>
+    </div>
+    <div class="body-col">
+      <div class="proc">
+        <ol class="steps">
+          <li><p>Registrer utløseren. Godkjente utløsere er tallene 6, 7 og 67,
+          samtlige tidsangivelser mellom 06:00 og 07:00, samt enhver høyde nær
+          <span class="mono num">2,00 m</span>.</p></li>
+          <li><p>Hev begge hender til brysthøyde, håndflatene ned, albuene fri fra
+          kroppen. <em>Én hånd er ikke godkjent utførelse.</em></p></li>
+          <li><p>Sett hendene i motfase om håndleddsaksen. Amplitude
+          <span class="mono num">±13&#176;</span>, frekvens
+          <span class="mono num">1,8&#8211;2,2 Hz</span>. Bevegelsen skal virke
+          uanstrengt; den er det ikke.</p></li>
+          <li><p>Ytre <em>«six seven»</em> på fallende tonehøyde. Norsk form
+          <em>sekstisju</em> er språklig korrekt og protokollmessig avvist.</p></li>
+          <li><p>Avslutt uten forklaring. Enhver begrunnelse gitt i etterkant
+          annullerer utførelsen i sin helhet.</p></li>
+        </ol>
+
+        <figure>
+          <div class="fig-frame">
+            <svg viewBox="0 0 240 210" role="img" aria-label="Teknisk tegning av håndbevegelsen: to hender som svinger i motfase om håndleddsaksen, amplitude 13 grader.">
+              <line class="h-axis" x1="20" y1="128" x2="220" y2="128"></line>
+              <line class="h-axis" x1="28" y1="132" x2="28" y2="180"></line>
+              <text class="h-txt" x="20" y="192">håndleddsakse</text>
+
+              <g class="swing-l">
+                <path class="hand" d="M66 128 L66 122 Q66 116 72 116 L96 116 Q104 116 104 124 L104 134 Q104 142 96 142 L72 142 Q66 142 66 136 Z"></path>
+                <path class="hand" d="M96 118 L112 112 Q118 110 120 116 Q122 122 116 124 L100 129 Z"></path>
+              </g>
+              <g class="swing-r">
+                <path class="hand" d="M174 128 L174 122 Q174 116 168 116 L144 116 Q136 116 136 124 L136 134 Q136 142 144 142 L168 142 Q174 142 174 136 Z"></path>
+                <path class="hand" d="M144 118 L128 112 Q122 110 120 116 Q118 122 124 124 L140 129 Z"></path>
+              </g>
+
+              <circle class="h-pivot" cx="66" cy="128" r="3"></circle>
+              <circle class="h-pivot" cx="174" cy="128" r="3"></circle>
+
+              <path class="h-arc" d="M66 84 A 44 44 0 0 1 96 96"></path>
+              <path class="h-arc" d="M174 172 A 44 44 0 0 1 144 160"></path>
+              <text class="h-txt" x="86" y="78">±13&#176;</text>
+              <text class="h-txt" x="112" y="192">2 Hz, motfase</text>
+              <text class="h-txt" x="20" y="30">Fig. 3</text>
+            </svg>
+          </div>
+          <figcaption><b>Fig. 3</b> &#8212; Utførelse sett forfra. Pilbuene angir
+          tillatt utslag, ikke anbefalt.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail">
+      <span class="clause">§5</span>
+      <h2>Avviksklasser</h2>
+      <p class="note">Til bruk ved intern kontroll</p>
+    </div>
+    <div class="body-col">
+      <div class="table-wrap">
+        <table>
+          <caption class="label">Tabell 2 &#8212; Klassifisering av avvik</caption>
+          <thead>
+            <tr><th scope="col">Kl.</th><th scope="col">Tilstand</th><th scope="col">Tiltak</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="klass k-a">A</span></th>
+              <td>Utførelse innenfor toleranse, med godkjent utløser til stede.</td>
+              <td class="val">Ingen</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="klass">B</span></th>
+              <td>Ytring uten utløser, typisk under stillelesing eller prøve.</td>
+              <td class="val">Merknad</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="klass">C</span></th>
+              <td>Ytring fra person over 30 år, uoppfordret.</td>
+              <td class="val">Kontekstkollaps</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="klass k-d">D</span></th>
+              <td>Ytring fra person over 30 år i den hensikt å virke oppdatert.</td>
+              <td class="val">Irreversibelt</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose tight">
+        <p>Klasse D lar seg ikke utbedre. Instituttet har forsøkt. Rapporten fra
+        forsøket er unntatt offentlighet, og forfatteren er nå selv klassifisert.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="rail">
+      <span class="clause">§6</span>
+      <h2>Konklusjon</h2>
+      <p class="note">Godkjent av kalibreringsutvalget</p>
+    </div>
+    <div class="body-col">
+      <div class="verdict">
+        <span class="label">Sluttmerknad</span>
+        <q>Sekstisju er ikke et svar. Det er en <b>respons</b>.</q>
+        <p>Et svar forutsetter et spørsmål. En respons forutsetter kun at noe
+        skjedde. Instituttet erklærer måleobjektet ferdig kalibrert og bevisst
+        uforklart, og anbefaler at det forblir slik til 2067.</p>
+        <div class="seal">
+          <div class="s1">Kalibrert</div>
+          <div class="s2">6&#8202;7</div>
+          <div class="s3">gyldig t.o.m. 2067</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <div>
+      <span class="label">Kildegrunnlag</span>
+      <ol class="refs">
+        <li>Dictionary.com kåret «67» til Word of the Year 2025.</li>
+        <li>Skrilla, «Doot Doot (6 7)», 2024. Tallparets primærkilde.</li>
+        <li>6&#8242;7&#8243; = 79 tommer &#215; 25,4 mm = 2006,6 mm. Registrert
+        spillerhøyde i NBA, bl.a. LaMelo Ball.</li>
+        <li>Nytellingsmåten (<em>sekstisju</em> framfor <em>syv og seksti</em>),
+        innført i Norge i 1951.</li>
+        <li>Polarsirkelen ligger på 66&#176;33&#8242; N. Holmium har atomnummer 67.
+        Begge forhold er verifiserbare og ingen av dem er relevante.</li>
+        <li>Instituttet i dette dokumentet finnes ikke. Tallet gjør det.</li>
+      </ol>
+    </div>
+    <div class="sig">
+      <span class="label">Kalibreringsansvarlig</span>
+      <div class="sigline"></div>
+      <p class="note mono">Seksjon for muntlig metrologi &#8212; 67&#176; N<br>
+      Utstedt 6. juli · Neste revisjon 7. juni</p>
+    </div>
+  </footer>
+
+</div>
