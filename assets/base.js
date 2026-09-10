@@ -11,21 +11,32 @@
   var ut = document.getElementById('apningsstatus');
   if (!ut) return;
 
+  var UKEDAGER = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag',
+                  'fredag', 'lørdag'];
+
+  function ukedag(d) { return d.getDay() >= 1 && d.getDay() <= 5; }
+
+  /* Neste virkedag klokka 06:00, regnet med Date og ikke med timearitmetikk.
+     Hopper over helg, siden seksjonen ikke er bemannet da. */
+  function nesteApning(na) {
+    var k = new Date(na.getFullYear(), na.getMonth(), na.getDate(), 6, 0, 0, 0);
+    if (k <= na) { k.setDate(k.getDate() + 1); }
+    while (!ukedag(k)) { k.setDate(k.getDate() + 1); }
+    return k;
+  }
+
   function tekst() {
     var na = new Date();
-    var t = na.getHours();
-    var m = na.getMinutes();
-    var ukedag = na.getDay() >= 1 && na.getDay() <= 5;
-
-    if (ukedag && t === 6) {
-      return 'Åpent nå. Stenger om ' + (60 - m) + ' min.';
+    if (ukedag(na) && na.getHours() === 6) {
+      return 'Åpent nå. Stenger om ' + (60 - na.getMinutes()) + ' min.';
     }
-    var timerTil = (6 - t + 24) % 24;
-    if (timerTil === 0) { timerTil = 24; }
-    if (!ukedag) {
-      return 'Stengt. Instituttet er ikke bemannet i helgen.';
+    var k = nesteApning(na);
+    var minutter = Math.round((k - na) / 60000);
+    if (minutter >= 24 * 60) {
+      return 'Stengt. Åpner ' + UKEDAGER[k.getDay()] + ' 06:00.';
     }
-    return 'Stengt. Åpner om ' + timerTil + ' t ' + (m ? 60 - m : 0) + ' min.';
+    return 'Stengt. Åpner om ' + Math.floor(minutter / 60) + ' t '
+         + (minutter % 60) + ' min.';
   }
 
   function vis() { ut.textContent = tekst(); }
