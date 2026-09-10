@@ -17,6 +17,7 @@ Statisk nettsted. Seks sider, ingen avhengigheter, ingen byggesteg.
 | `masteroppgave.html` | MGK-67/2026 | Masteroppgave i gestuell kalibrering, med faseplott |
 | `arkiv.html` | ARK-67 | Sorterbart dokumentregister. Ett dokument er unntatt offentlighet |
 | `instituttet.html` | NISK-01/2025 | Mandat, seksjoner, bemanning, åpningstider |
+| `404.html` | NISK-404 | Avvik i dokumentforvaltningen. Skiller seg fra dokumenter som finnes, men er unntatt offentlighet |
 
 ## Hva som er ekte
 
@@ -40,6 +41,19 @@ nord for polarsirkelen.
 Instituttet, seksjonene, de ansatte, litteraturen og masteroppgaven finnes
 ikke. Tallet gjør det.
 
+## Én fil
+
+`python build-bundle.py` spleiser de seks sidene til én selvstendig fil med
+hash-ruter, der `#/litteratur` og kryssenker som `[3]` fortsatt virker:
+
+- `dist/sekstisju-protokollen.html` — frittstående dokument
+- `dist/artifact.html` — samme innhold uten doctype og head, for publisering
+
+Flersidesversjonen i rota er kanonisk. Den har ekte URL-er, virker uten
+JavaScript, og lar hvert dokument deles for seg — som er hele poenget med et
+institutt som nummererer dokumentene sine. Bundelen genereres fra samme kilde,
+så de to kan ikke gli fra hverandre.
+
 ## Teknisk
 
 - **Én delt `assets/base.css`** med tokens, komponenter og fonter. Lastes én
@@ -53,6 +67,10 @@ ikke. Tallet gjør det.
 - **Fullt lys/mørkt tema** via `prefers-color-scheme` og `data-theme`.
 - **Ingen rammeverk.** To små vanilla-skript: sortering av arkivtabellen og
   selvklassifiseringen.
+- **Utskriftsstil** i `@media print`: navigasjon og lenkekort skjules, figurer
+  og tabeller brytes ikke over sider, animasjonen fryses, 18 mm marg.
+- **Favicon** er en inline SVG i data-URI, samme merke som instituttets segl.
+- Skriv `67` hvor som helst på nettstedet. Instituttet registrerer ytringen.
 - Håndbevegelsen i Fig. 3 respekterer `prefers-reduced-motion` og fryses da i
   motsatt utslag, slik at stillbildet fortsatt viser gesten.
 
