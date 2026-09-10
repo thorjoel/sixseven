@@ -1,56 +1,82 @@
 # Sekstisju-protokollen
 
-Kalibreringssertifikat for tallet 67. Én statisk HTML-fil, ingen avhengigheter,
-ingen byggesteg.
+Et fiktivt kalibreringsinstitutt behandler 6-7-memet som det lengdemålet det
+egentlig er: 6′7″ = 79 tommer × 25,4 mm = **2006,6 mm**. Derfra følger
+toleranser, avviksklasser, en obligatorisk håndbevegelse spesifisert til ±13°
+ved 2 Hz, et litteraturregister og en masteroppgave.
 
-Dokumentet behandler 6-7-memet som det lengdemålet det egentlig er:
-6′7″ = 79 tommer × 25,4 mm = **2006,6 mm**. Derfra følger toleranser,
-avviksklasser og en obligatorisk håndbevegelse spesifisert til ±13° ved 2 Hz.
+Statisk nettsted. Seks sider, ingen avhengigheter, ingen byggesteg.
 
-## Innhold
+## Sider
 
-| Klausul | Emne |
-| --- | --- |
-| §1 | Opphav og omløp — kildekritisk gjennomgang |
-| §2 | Nummerisk revisjon — verifiserte egenskaper ved 67 |
-| §3 | Feltmålinger — ytringsfrekvens etter klassetrinn |
-| §4 | Utførelsesprotokoll — håndbevegelsen som teknisk tegning |
-| §5 | Avviksklasser A–D |
-| §6 | Litteratur — oppdiktet, henvist til som [n] i teksten |
-| §7 | Konklusjon |
+| Fil | Dokument | Innhold |
+| --- | --- | --- |
+| `index.html` | NISK-67/2026 | Protokollen: §1–§5, med målestav, feltmålinger og utførelsesprotokoll |
+| `avvik.html` | NISK-67/2026 B | Klassifiseringsskjema A–D og verktøy for selvklassifisering |
+| `litteratur.html` | NISK-67/2026 C | Ni arbeider med sammendrag, fagfellemerknader og tilgangsstatus |
+| `masteroppgave.html` | MGK-67/2026 | Masteroppgave i gestuell kalibrering, med faseplott |
+| `arkiv.html` | ARK-67 | Sorterbart dokumentregister. Ett dokument er unntatt offentlighet |
+| `instituttet.html` | NISK-01/2025 | Mandat, seksjoner, bemanning, åpningstider |
 
-Tallene i Fig. 2 er merket som illustrasjonsdata. Alt i Tabell 1 er
-verifiserbart: 67 er det 19. primtallet, danner et *sexy primtallspar* med 61,
-er atomnummeret til holmium — grunnstoffet med det høyeste magnetiske momentet
-av alle naturlig forekommende — og 67° N er første hele breddegrad nord for
-polarsirkelen.
+## Hva som er ekte
 
-Dokumentet holder to atskilte henvisningssystemer: hevet tall peker til
-**Kildegrunnlag** i kolofonen, som er verifiserbart, mens `[n]` peker til
-**§6 Litteratur**, som i sin helhet er oppdiktet og merket som det.
+Nettstedet holder to atskilte henvisningssystemer, slik at det oppdiktede ikke
+kan forveksles med det verifiserbare:
 
-Instituttet i dokumentet finnes ikke. Tallet gjør det.
+- **Hevet tall** peker til *Kildegrunnlag* i protokollens kolofon. Dette er
+  faktisk etterprøvbart: Dictionary.com kåret «67» til Word of the Year 2025,
+  Skrilla ga ut «Doot Doot (6 7)» i 2024, 6′7″ er en registrert spillerhøyde i
+  NBA, og nytellingsmåten (*sekstisju* framfor *syv og seksti*) ble innført i
+  Norge i 1951.
+- **`[n]` i oransje mono** peker til litteraturregisteret, som i sin helhet er
+  oppdiktet og merket som det på hver side.
+
+Tabell 1 er verifiserbar hele veien: 67 er det 19. primtallet, danner et *sexy
+primtallspar* med 61 (etablert fagterm), 6 × 7 = 42, 6/7 = 0,857142 med
+periodelengde 6, holmium har atomnummer 67 og det høyeste magnetiske momentet
+av alle naturlig forekommende grunnstoffer, og 67° N er første hele breddegrad
+nord for polarsirkelen.
+
+Instituttet, seksjonene, de ansatte, litteraturen og masteroppgaven finnes
+ikke. Tallet gjør det.
+
+## Teknisk
+
+- **Én delt `assets/base.css`** med tokens, komponenter og fonter. Lastes én
+  gang og gjenbrukes på alle seks sidene.
+- **Fontene er inlinet** som base64 woff2: fire variabel-faces over
+  latin-subsettet, deklarert over sine reelle wght-akser (Bricolage Grotesque
+  200–800, Petrona 100–900, Spline Sans Mono 300–700). Ingen eksterne kall;
+  typografien er ikke nettverksavhengig.
+- **Figurene er håndtegnet SVG** som arver farger fra temavariablene. Fig. 4 er
+  et faseplott generert fra `sin(2π·2t)`.
+- **Fullt lys/mørkt tema** via `prefers-color-scheme` og `data-theme`.
+- **Ingen rammeverk.** To små vanilla-skript: sortering av arkivtabellen og
+  selvklassifiseringen.
+- Håndbevegelsen i Fig. 3 respekterer `prefers-reduced-motion` og fryses da i
+  motsatt utslag, slik at stillbildet fortsatt viser gesten.
+
+### Om motfase
+
+Håndleddsaksene står speilvendt om midtlinjen. En rotasjon med *samme* fortegn
+i begge håndledd gir derfor *motsatt* vertikalt utslag ved fingertuppene:
+leddvinklene er i fase, utslagene i motfase. Animasjonen i Fig. 3 og kurvene i
+Fig. 4 bygger på dette, og masteroppgavens kapittel 5 handler om nettopp den
+forvekslingen.
 
 ## Kjør lokalt
 
-Åpne `index.html` direkte i en nettleser. Ingen server nødvendig.
+```
+python -m http.server 8067
+```
+
+Sidene må serveres over HTTP, ikke åpnes direkte fra disk — `assets/base.css`
+er en relativ referanse. `.claude/launch.json` starter det samme på port 8067.
 
 ## Deploy
 
 Statisk side på Vercel. Framework preset **Other**, ingen build command,
-output directory er repo-rota.
-
-## Teknisk
-
-- Én fil, ~700 linjer HTML/CSS/SVG. Ingen JavaScript.
-- Figurene er håndtegnet SVG som arver fargene fra temavariablene.
-- Fullt lys/mørkt tema via `prefers-color-scheme` og `data-theme`.
-- Håndbevegelsen i Fig. 3 respekterer `prefers-reduced-motion` og fryses da
-  i motsatt utslag, slik at stillbildet fortsatt viser gesten.
-- Typografi: Bricolage Grotesque, Petrona og Spline Sans Mono, inlinet som
-  base64 woff2 direkte i fila. Ingen eksterne kall — sida er selvstendig.
-  Fire variabel-faces over latin-subsettet, deklarert over sine reelle
-  wght-akser (200-800, 100-900, 300-700).
+output directory er repo-rota. Hver push til `main` auto-deployer.
 
 ## Måleusikkerhet
 

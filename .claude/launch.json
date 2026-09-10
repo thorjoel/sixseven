@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sixseven",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8067"],
+      "port": 8067
+    }
+  ]
+}
